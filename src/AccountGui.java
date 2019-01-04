@@ -1,13 +1,23 @@
 import javax.swing.*;	// Needed for Swing classes
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
+
 import java.awt.*;
 import java.awt.event.*; // Needed for ActionListener Interface
+import java.beans.PropertyChangeEvent;
 import java.io.*;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AccountGui extends JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
+	
 	//declare Panels
 	private JPanel panel;
 	private JPanel Create;
@@ -70,6 +80,8 @@ public class AccountGui extends JFrame {
 	private JComboBox graduateYearCB;	
 	private JComboBox StaffCB;
 	
+	String createdUserName;
+	
 	String[] graduateYears = { "", "2019", "2020", "2021",
 			"2022", "2023", "2024" };
 	
@@ -77,7 +89,7 @@ public class AccountGui extends JFrame {
 			"Middle Teacher", "High Teacher", "Elementary Office", 
 			"Middle Office", "High Office", "Maitence/Custodian",
 			"Bus Garage", "Cafeteria", "Board Office" };
-	
+		
 	
 	/**
 		Constructor
@@ -111,6 +123,8 @@ public class AccountGui extends JFrame {
 	*/
 
 	private void buildPanel() {
+		createdUserName = "";
+		
 		// Create my buttons.
 		createUser = new JButton("Create User");
 		exitButton = new JButton("Exit");
@@ -120,7 +134,6 @@ public class AccountGui extends JFrame {
 		createUser.addActionListener(new createUserListener());
 		exitButton.addActionListener(new exitButtonListener());
 		ResetUser.addActionListener(new ResetUserButtonListener());
-
 		
 		//set mnemonic and tooltip
 		createUser.setMnemonic(KeyEvent.VK_C);
@@ -129,7 +142,7 @@ public class AccountGui extends JFrame {
 		exitButton.setToolTipText("Click here to Exit the Program");
 		ResetUser.setMnemonic(KeyEvent.VK_R);
 		ResetUser.setToolTipText("Click here to Reset the User Password");		
-
+ 
 		
 		//Set Labels and textfields
 		firstName = new JLabel("First Name");
@@ -160,7 +173,11 @@ public class AccountGui extends JFrame {
 		RConfirmPasswordTF = new JTextField();
 
 		blank = new JLabel("");
-		
+
+		firstNameTF.addActionListener(new firstNameListener());
+		lastNameTF.addActionListener(new lastNameListener());
+
+
 		//declare JComboBoxes
 		graduateYearCB = new JComboBox(graduateYears);
 		graduateYearCB.setEditable(true);
@@ -266,9 +283,10 @@ public class AccountGui extends JFrame {
 		Exit.add(exitButton, BorderLayout.SOUTH);
 		panel.add(blank);
 		panel.add(Exit);
-	}
-	
-	
+		
+	}	
+
+
 	/**
 		rollButtonListener is an action listener class for
 		the roll button.
@@ -283,25 +301,38 @@ public class AccountGui extends JFrame {
 		*/
 		
 		public void actionPerformed(ActionEvent e) {
-			String s = null;
 			
-			String lname = lastNameTF.getText();
-			String fname = firstNameTF.getText();
-
-			panel.setBackground(Color.YELLOW);
-			
-			if (fname.length() == 0 || lname.length() == 0) {
-				System.out.println("error");
-				fname.replaceAll("g", "d");
-				
-				char fInitial = fname.charAt(0);
-				System.out.println(fInitial);
-				
-				String userName = fInitial + lname;
-
+			Pattern p = Pattern.compile("[\\W]");
+		    Matcher m = p.matcher(userNameTF.getText());
+		    boolean b = m.find();
+		    if (b == true) {
+		        JOptionPane.showMessageDialog(null, "Error:  An invalid character was entered.  Please fix and try again.");
 			} else {
+				createdUserName = userName.getText();
 				
+				createGoogleAccount();
+				createADAccount();
 			}
+
+//			String s = null;
+//			
+//			String lname = lastNameTF.getText();
+//			String fname = firstNameTF.getText();
+//
+//			panel.setBackground(Color.YELLOW);
+//			
+//			if (fname.length() == 0 || lname.length() == 0) {
+//				System.out.println("error");
+//				fname.replaceAll("g", "d");
+//				
+//				char fInitial = fname.charAt(0);
+//				System.out.println(fInitial);
+//				
+//				String userName = fInitial + lname;
+//
+//			} else {
+//				
+//			}
 
 			
 			
@@ -338,6 +369,16 @@ public class AccountGui extends JFrame {
 			
 
 		}
+
+		private void createADAccount() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		private void createGoogleAccount() {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 	private class exitButtonListener implements ActionListener {
@@ -369,6 +410,51 @@ public class AccountGui extends JFrame {
 		}
 		
 	}
+
+	
+	private class firstNameListener implements ActionListener {
+		
+		/**
+		The actionPerformed method executes when the user
+		clicks on the exit button.
+		@param e The event object.
+		*/
+
+		public void actionPerformed(ActionEvent e) {
+			
+			try{
+				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
+			} catch (Exception e1) {
+				createdUserName = "";
+			}
+			
+			userNameTF.setText(createdUserName);
+		}
+		
+	}
+	
+	
+	private class lastNameListener implements ActionListener {
+		
+		/**
+		The actionPerformed method executes when the user
+		clicks on the exit button.
+		@param e The event object.
+		*/
+
+		public void actionPerformed(ActionEvent e) {
+			
+			try{
+				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
+			} catch (Exception e1) {
+				createdUserName = "";
+			}
+			
+			userNameTF.setText(createdUserName);
+		}
+		
+	}
+	
 	
 	/**
 		main method
@@ -378,5 +464,5 @@ public class AccountGui extends JFrame {
 		new AccountGui();
 	}
 
-	
+
 }
