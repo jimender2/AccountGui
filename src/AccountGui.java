@@ -422,7 +422,7 @@ public class AccountGui extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			
-			try{
+			try {
 				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
@@ -444,7 +444,7 @@ public class AccountGui extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			
-			try{
+			try {
 				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
@@ -455,6 +455,27 @@ public class AccountGui extends JFrame {
 		
 	}
 	
+	
+	private class studentIDListener implements ActionListener {
+		
+		/**
+		The actionPerformed method executes when the user
+		clicks on the exit button.
+		@param e The event object.
+		*/
+
+		public void actionPerformed(ActionEvent e) {
+			
+			try {
+				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
+			} catch (Exception e1) {
+				createdUserName = "";
+			}
+			
+			userNameTF.setText(createdUserName);
+		}
+		
+	}
 	
 	/**
 		main method
