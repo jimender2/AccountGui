@@ -1,24 +1,13 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;	// Needed for Swing classes
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.Document;
-import javax.swing.text.JTextComponent;
-
 import java.awt.*;
 import java.awt.event.*; // Needed for ActionListener Interface
-import java.beans.PropertyChangeEvent;
-import java.io.*;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AccountGui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	//declare Panels
 	private JPanel panel;
 	private JPanel Create;
@@ -30,22 +19,22 @@ public class AccountGui extends JFrame {
 	private JPanel ResetBoth;
 	private JPanel ResetLeft;
 	private JPanel ResetRight;
-	
+
 	//menu stuff
-//	private JMenuBar bar;
+	//private JMenuBar bar;
 
 	//declare buttons
 	private JButton createUser;
 	private JButton ResetUser;
 	private JButton exitButton;
-	
+
 	//declare window size
 	private final int WINDOW_WIDTH = 750;
 	private final int WINDOW_HEIGHT = 500;
-	
+
 	//declare imageIcons
-//	private ImageIcon di1;
-	
+	//private ImageIcon di1;
+
 	//declare JLabel
 	private JLabel firstName;
 	private JLabel lastName;
@@ -54,13 +43,13 @@ public class AccountGui extends JFrame {
 	private JLabel Staff;
 	private JLabel userName;
 	private JLabel password;
-	
+
 	private JLabel RuserName;
 	private JLabel RfirstName;
 	private JLabel RLastName;
 	private JLabel RnewPassword;
 	private JLabel RconfirmNewPassword;
-	
+
 	private JLabel blank;
 	private JLabel blank1;
 
@@ -80,18 +69,18 @@ public class AccountGui extends JFrame {
 	//declare JComboBox
 	private JComboBox graduateYearCB;	
 	private JComboBox StaffCB;
-	
+
 	String createdUserName;
-	
+
 	String[] graduateYears = { "", "2019", "2020", "2021",
 			"2022", "2023", "2024" };
-	
+
 	String[] staffArea = { "", "Elementary Teacher",
 			"Middle Teacher", "High Teacher", "Elementary Office", 
 			"Middle Office", "High Office", "Maitence/Custodian",
 			"Bus Garage", "Cafeteria", "Board Office" };
-		
-	
+
+
 	/**
 		Constructor
 	*/
@@ -118,10 +107,10 @@ public class AccountGui extends JFrame {
 
 		// Display the window.
 		setVisible(true);
-		
+	
 	}
 
-	
+
 	/**
 		The buildPanel method adds a label, text field, and
 		and a button to a panel.
@@ -129,7 +118,7 @@ public class AccountGui extends JFrame {
 
 	private void buildPanel() {
 		createdUserName = "";
-		
+
 		// Create my buttons.
 		createUser = new JButton("Create User");
 		exitButton = new JButton("Exit");
@@ -139,7 +128,7 @@ public class AccountGui extends JFrame {
 		createUser.addActionListener(new createUserListener());
 		exitButton.addActionListener(new exitButtonListener());
 		ResetUser.addActionListener(new ResetUserButtonListener());
-		
+
 		//set mnemonic and tooltip
 		createUser.setMnemonic(KeyEvent.VK_C);
 		createUser.setToolTipText("Click here to create the User");
@@ -147,8 +136,8 @@ public class AccountGui extends JFrame {
 		exitButton.setToolTipText("Click here to Exit the Program");
 		ResetUser.setMnemonic(KeyEvent.VK_R);
 		ResetUser.setToolTipText("Click here to Reset the User Password");		
- 
-		
+
+
 		//Set Labels and textfields
 		firstName = new JLabel("First Name");
 		lastName = new JLabel("Last Name");
@@ -157,7 +146,7 @@ public class AccountGui extends JFrame {
 		Staff = new JLabel("Staff Location");
 		userName = new JLabel("User Name");
 		password = new JLabel("Password");
-		
+
 		RuserName = new JLabel("User Name");
 		RfirstName = new JLabel("First Name");
 		RLastName = new JLabel("Last Name");
@@ -182,22 +171,10 @@ public class AccountGui extends JFrame {
 		firstNameTF.addActionListener(new firstNameListener());
 		lastNameTF.addActionListener(new lastNameListener());
 
-
 		//declare JComboBoxes
 		graduateYearCB = new JComboBox(graduateYears);
 		graduateYearCB.setEditable(true);
 		StaffCB = new JComboBox(staffArea);
-		
-		//Create default images
-		//di1 = new ImageIcon("Die1.jpg");
-		//d1 = new JLabel(di1);
-		
-		//JTextField textField = new JTextField("test");
-		//textField.setEditable(false);
-		
-		//JScrollPane scrollPane = new JScrollPane(list);
-		
-
 
 		// Create JPanel objects and let the panel
 		// fields reference it.
@@ -211,20 +188,9 @@ public class AccountGui extends JFrame {
 		ResetBoth = new JPanel();
 		ResetLeft = new JPanel();
 		ResetRight = new JPanel();
-		
-		
-		
-//		bar = new JMenuBar();
-//		JMenu menu = new JMenu("test1");
-//		JMenuItem item = new JMenuItem("test");
-//		bar.add(menu);
-//		menu.add(item);
-		
-//		scrollPane.setVerticalScrollBarPolicy(
-//				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
+
 		//Set Layouts of the panels
-		
+
 		panel.setLayout(new GridLayout(2,1));
 		Create.setLayout(new BorderLayout());
 		CreateBoth.setLayout(new GridLayout(1,2));
@@ -241,7 +207,6 @@ public class AccountGui extends JFrame {
 				+ "Account"));
 		ResetBoth.setBorder(BorderFactory.createTitledBorder("Reset "
 				+ "Account"));
-		
 
 		//add components
 		panel.add(Create);
@@ -252,8 +217,6 @@ public class AccountGui extends JFrame {
 		Reset.add(ResetBoth);
 		ResetBoth.add(ResetLeft);
 		ResetBoth.add(ResetRight);
-		
-		
 
 		CreateLeft.add(firstName);
 		CreateLeft.add(lastName);
@@ -262,7 +225,7 @@ public class AccountGui extends JFrame {
 		CreateLeft.add(Staff);
 		CreateLeft.add(userName);
 		CreateLeft.add(password);
-		
+
 		CreateRight.add(firstNameTF);
 		CreateRight.add(lastNameTF);
 		CreateRight.add(studentIDTF);
@@ -270,25 +233,25 @@ public class AccountGui extends JFrame {
 		CreateRight.add(StaffCB);
 		CreateRight.add(userNameTF);
 		CreateRight.add(passwordTF);
-		
+
 		ResetLeft.add(RuserName);
 		ResetLeft.add(RfirstName);
 		ResetLeft.add(RLastName);
 		ResetLeft.add(RnewPassword);
 		ResetLeft.add(RconfirmNewPassword);
-		
+
 		ResetRight.add(RuserNameTF);
 		ResetRight.add(RfirstNameTF);
 		ResetRight.add(RLastNameTF);
 		ResetRight.add(RNewPasswordTF);
 		ResetRight.add(RConfirmPasswordTF);
-		
+
 		Create.add(createUser, BorderLayout.SOUTH);
 		Reset.add(ResetUser, BorderLayout.SOUTH);
 		Exit.add(exitButton, BorderLayout.SOUTH);
 		panel.add(blank);
 		panel.add(Exit);
-		
+
 	}	
 
 
@@ -304,9 +267,9 @@ public class AccountGui extends JFrame {
 		clicks on the create button.
 		@param e The event object.
 		*/
-		
+
 		public void actionPerformed(ActionEvent e) {
-			
+	
 			Pattern p = Pattern.compile("[\\W]");
 		    Matcher m = p.matcher(userNameTF.getText());
 		    boolean b = m.find();
@@ -314,9 +277,10 @@ public class AccountGui extends JFrame {
 		        JOptionPane.showMessageDialog(null, "Error:  An invalid character was entered.  Please fix and try again.");
 			} else {
 				createdUserName = userName.getText();
-				
-				createGoogleAccount();
-				createADAccount();
+
+				String org = (String) StaffCB.getSelectedItem();
+				boolean createGA = createGoogleAccount(userName.getText(), firstName.getText(), lastName.getText(), password.getText(), org, false);
+				boolean createAD = createADAccount(userName.getText(), firstName.getText(), lastName.getText(), password.getText(), org, false);
 			}
 
 //			String s = null;
@@ -339,8 +303,8 @@ public class AccountGui extends JFrame {
 //				
 //			}
 
-			
-			
+
+
 //			try {
 //					
 //				// run the Unix "ps -ef" command
@@ -370,24 +334,49 @@ public class AccountGui extends JFrame {
 //				System.out.println("exception happened - here's what I know: ");
 //				e1.printStackTrace();
 //			}
-			
-			
+
+
 
 		}
 
-		private void createADAccount() {
-			// TODO Auto-generated method stub
-			
+		private boolean createADAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
+			return true;
 		}
 
-		private void createGoogleAccount() {
-			// TODO Auto-generated method stub
-			
+		private boolean createGoogleAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
+
+//				Process p1 = Runtime.getRuntime().exec("PowerShell -Command \"Add-Type -AssemblyName " 
+//				+ "PresentationFramework;[System.Windows.MessageBox]::Show('Hello World')");
+//				Process p = Runtime.getRuntime().exec("sndvol.exe -f\r\n");
+//
+//				
+//				BufferedReader stdInput = new BufferedReader(new 
+//						InputStreamReader(p.getInputStream()));
+//
+//				BufferedReader stdError = new BufferedReader(new 
+//						InputStreamReader(p.getErrorStream()));
+//
+//				// read the output from the command
+//				while ((s = stdInput.readLine()) != null) {
+//					System.out.println(s);
+//				}
+//					
+//				// read any errors from the attempted command
+//				while ((s = stdError.readLine()) != null) {
+//					System.out.println(s);
+//				}
+//				
+//			} catch (IOException e1) {
+//				System.out.println("exception happened - here's what I know: ");
+//				e1.printStackTrace();
+//			}
+			boolean bool = true;
+			return bool;
 		}
 	}
-	
+
 	private class exitButtonListener implements ActionListener {
-		
+
 		/**
 		The actionPerformed method executes when the user
 		clicks on the exit button.
@@ -398,12 +387,12 @@ public class AccountGui extends JFrame {
 			//Exit the program
 			System.exit(0);
 		}
-		
+
 	}
-	
-	
+
+
 	private class ResetUserButtonListener implements ActionListener {
-		
+
 		/**
 		The actionPerformed method executes when the user
 		clicks on the exit button.
@@ -411,14 +400,14 @@ public class AccountGui extends JFrame {
 		*/
 
 		public void actionPerformed(ActionEvent e) {
-			
+
 		}
-		
+
 	}
 
-	
+
 	private class firstNameListener implements ActionListener {
-		
+
 		/**
 		The actionPerformed method executes when the user
 		clicks on the exit button.
@@ -426,21 +415,21 @@ public class AccountGui extends JFrame {
 		*/
 
 		public void actionPerformed(ActionEvent e) {
-			
+
 			try {
 				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
 			}
-			
+
 			userNameTF.setText(createdUserName);
 		}
-		
+
 	}
-	
-	
+
+
 	private class lastNameListener implements ActionListener {
-		
+
 		/**
 		The actionPerformed method executes when the user
 		clicks on the exit button.
@@ -448,21 +437,21 @@ public class AccountGui extends JFrame {
 		*/
 
 		public void actionPerformed(ActionEvent e) {
-			
+
 			try {
 				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
 			}
-			
+
 			userNameTF.setText(createdUserName);
 		}
-		
+
 	}
-	
-	
+
+
 	private class studentIDListener implements ActionListener {
-		
+
 		/**
 		The actionPerformed method executes when the user
 		clicks on the exit button.
@@ -470,22 +459,22 @@ public class AccountGui extends JFrame {
 		*/
 
 		public void actionPerformed(ActionEvent e) {
-			
+
 			try {
 				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
 			}
-			
+
 			userNameTF.setText(createdUserName);
 		}
-		
+
 	}
-	
+
 	/**
 		main method
 	*/
-	
+
 	public static void main(String[] args) {
 		new AccountGui();
 	}
