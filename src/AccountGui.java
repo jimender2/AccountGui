@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;	// Needed for Swing classes
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -96,6 +97,10 @@ public class AccountGui extends JFrame {
 	*/
 
 	public AccountGui() {
+
+		// Set the Custom image
+		setIconImage(new ImageIcon("BRSeal.png").getImage());
+
 		// Set the window title.
 		setTitle("Account GUI");
 
