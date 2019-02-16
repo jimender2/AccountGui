@@ -8,3 +8,8 @@
 /AccountGui$firstNameListener.class
 /AccountGui$lastNameListener.class
 /AccountGui$studentIDListener.class
+/ResetUserButtonListener.class
+/exitButtonListener.class
+/firstNameListener.class
+/lastNameListener.class
+/studentIDListener.class

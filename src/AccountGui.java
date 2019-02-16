@@ -1,8 +1,25 @@
+import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.BasicAttributes;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.ModificationItem;
 import javax.swing.*;	// Needed for Swing classes
 import java.awt.*;
 import java.awt.event.*; // Needed for ActionListener Interface
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.security.KeyStore.Entry.Attribute;
+import java.util.jar.Attributes;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Hashtable;
+import javax.naming.Context;
+import javax.naming.NamingException;
+import javax.naming.ldap.InitialLdapContext;
+import javax.naming.ldap.LdapContext;
+import javax.naming.ldap.StartTlsRequest;
+import javax.naming.ldap.StartTlsResponse;
+
 
 public class AccountGui extends JFrame {
 
@@ -339,37 +356,34 @@ public class AccountGui extends JFrame {
 
 		}
 
-		private boolean createADAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
+		private boolean createGoogleAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
 			return true;
 		}
 
-		private boolean createGoogleAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
+		private boolean createADAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
 
-//				Process p1 = Runtime.getRuntime().exec("PowerShell -Command \"Add-Type -AssemblyName " 
-//				+ "PresentationFramework;[System.Windows.MessageBox]::Show('Hello World')");
-//				Process p = Runtime.getRuntime().exec("sndvol.exe -f\r\n");
-//
-//				
-//				BufferedReader stdInput = new BufferedReader(new 
-//						InputStreamReader(p.getInputStream()));
-//
-//				BufferedReader stdError = new BufferedReader(new 
-//						InputStreamReader(p.getErrorStream()));
-//
-//				// read the output from the command
-//				while ((s = stdInput.readLine()) != null) {
-//					System.out.println(s);
-//				}
-//					
-//				// read any errors from the attempted command
-//				while ((s = stdError.readLine()) != null) {
-//					System.out.println(s);
-//				}
-//				
-//			} catch (IOException e1) {
-//				System.out.println("exception happened - here's what I know: ");
-//				e1.printStackTrace();
-//			}
+				String s;
+				String t = "Hello world";
+				try {
+					Process p1 = Runtime.getRuntime().exec("PowerShell -Command \"Add-Type -AssemblyName " 
+					+ "PresentationFramework;[System.Windows.MessageBox]::Show('" + t + "')");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					Process p = Runtime.getRuntime().exec("PowerShell -Command powershell.exe " + userName + " " + firstName + " " + lastName + " " + password + " " + org + " " + ChangePassword);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+
+
+			
+			
+
 			boolean bool = true;
 			return bool;
 		}
