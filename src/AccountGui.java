@@ -375,7 +375,6 @@ public class AccountGui extends JFrame {
 				try {
 					Process p = Runtime.getRuntime().exec("PowerShell -Command powershell.exe " + userName + " " + firstName + " " + lastName + " " + password + " " + org + " " + ChangePassword);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
