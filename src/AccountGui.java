@@ -508,25 +508,25 @@ public class AccountGui extends JFrame {
 		if (graduateYearCB.getSelectedItem()=="0") {
 			String index = StaffCB.getSelectedItem().toString();
 			if (index.equals( "Elementary Teacher")) {
-				
+				return "";
 			} else if (index.equals( "Middle Teacher")) {
-							
+				return "";
 			} else if (index.equals( "High Teacher")) {
-			
+				return "";
 			} else if (index.equals( "Elementary Office")) {
-			
+				return "";
 			} else if (index.equals( "Middle Office")) {
-			
+				return "";
 			} else if (index.equals( "High Office")) {
-			
+				return "";
 			} else if (index.equals( "Maitence/Custodian")) {
-			
+				return "";
 			} else if (index.equals( "Bus Garage")) {
-			
+				return "";
 			} else if (index.equals( "Cafeteria")) {
-			
+				return "";
 			} else if (index.equals( "Board Office")) {
-			
+				return "";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
@@ -540,49 +540,49 @@ public class AccountGui extends JFrame {
 		} else if (StaffCB.getSelectedItem()!="0") {
 			String index = graduateYearCB.getSelectedItem().toString();
 			if (index.equals( "2019")) {
-				
+				return "";
 			} else if (index.equals( "2020")) {
-							
+				return "";
 			} else if (index.equals( "2021")) {
-			
+				return "";
 			} else if (index.equals( "2022")) {
-			
+				return "";
 			} else if (index.equals( "2023")) {
-			
+				return "";
 			} else if (index.equals( "2024")) {
-			
+				return "";
 			} else if (index.equals( "2025")) {
-			
+				return "";
 			} else if (index.equals( "2026")) {
-			
+				return "";
 			} else if (index.equals( "2027")) {
-			
+				return "";
 			} else if (index.equals( "2028")) {
-				
+				return "";
 			} else if (index.equals( "2029")) {
-				
+				return "";
 			} else if (index.equals( "2030")) {
-				
+				return "";
 			} else if (index.equals( "2031")) {
-				
+				return "";
 			} else if (index.equals( "2032")) {
-				
+				return "";
 			} else if (index.equals( "2033")) {
-				
+				return "";
 			} else if (index.equals( "2034")) {
-				
+				return "";
 			} else if (index.equals( "2035")) {
-				
+				return "";
 			} else if (index.equals( "2036")) {
-				
+				return "";
 			} else if (index.equals( "2037")) {
-				
+				return "";
 			} else if (index.equals( "2038")) {
-				
+				return "";
 			} else if (index.equals( "2039")) {
-				
+				return "";
 			} else if (index.equals( "2040")) {
-
+				return "";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
@@ -601,25 +601,25 @@ public class AccountGui extends JFrame {
 		if (graduateYearCB.getSelectedItem()=="0") {
 			String index = StaffCB.getSelectedItem().toString();
 			if (index.equals( "Elementary Teacher")) {
-				
+				return "";
 			} else if (index.equals( "Middle Teacher")) {
-							
+				return "";
 			} else if (index.equals( "High Teacher")) {
-			
+				return "";
 			} else if (index.equals( "Elementary Office")) {
-			
+				return "";
 			} else if (index.equals( "Middle Office")) {
-			
+				return "";
 			} else if (index.equals( "High Office")) {
-			
+				return "";
 			} else if (index.equals( "Maitence/Custodian")) {
-			
+				return "";
 			} else if (index.equals( "Bus Garage")) {
-			
+				return "";
 			} else if (index.equals( "Cafeteria")) {
-			
+				return "";
 			} else if (index.equals( "Board Office")) {
-			
+				return "";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
@@ -633,49 +633,49 @@ public class AccountGui extends JFrame {
 		} else if (StaffCB.getSelectedItem()!="0") {
 			String index = graduateYearCB.getSelectedItem().toString();
 			if (index.equals( "2019")) {
-				
+				return "";
 			} else if (index.equals( "2020")) {
-							
+				return "";
 			} else if (index.equals( "2021")) {
-			
+				return "";
 			} else if (index.equals( "2022")) {
-			
+				return "";
 			} else if (index.equals( "2023")) {
-			
+				return "";
 			} else if (index.equals( "2024")) {
-			
+				return "";
 			} else if (index.equals( "2025")) {
-			
+				return "";
 			} else if (index.equals( "2026")) {
-			
+				return "";
 			} else if (index.equals( "2027")) {
-			
+				return "";
 			} else if (index.equals( "2028")) {
-				
+				return "";
 			} else if (index.equals( "2029")) {
-				
+				return "";
 			} else if (index.equals( "2030")) {
-				
+				return "";
 			} else if (index.equals( "2031")) {
-				
+				return "";
 			} else if (index.equals( "2032")) {
-				
+				return "";
 			} else if (index.equals( "2033")) {
-				
+				return "";
 			} else if (index.equals( "2034")) {
-				
+				return "";
 			} else if (index.equals( "2035")) {
-				
+				return "";
 			} else if (index.equals( "2036")) {
-				
+				return "";
 			} else if (index.equals( "2037")) {
-				
+				return "";
 			} else if (index.equals( "2038")) {
-				
+				return "";
 			} else if (index.equals( "2039")) {
-				
+				return "";
 			} else if (index.equals( "2040")) {
-
+				return "";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
