@@ -105,7 +105,7 @@ public class AccountGui extends JFrame {
 	public AccountGui() {
 
 		// Set the Custom image
-		setIconImage(new ImageIcon("BRSeal.png").getImage());
+		setIconImage(new ImageIcon("logo.png").getImage());
 
 		// Set the window title.
 		setTitle("Account GUI");
