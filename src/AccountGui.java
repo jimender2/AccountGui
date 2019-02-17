@@ -285,7 +285,7 @@ public class AccountGui extends JFrame {
 			} else {
 				createdUserName = userName.getText();
 
-				String org = org();
+				String org = ADOrg();
 				boolean createGA = createGoogleAccount(userName.getText(),
 					firstName.getText(), lastName.getText(), 
 					password.getText(), org, false);
@@ -579,7 +579,102 @@ public class AccountGui extends JFrame {
 				
 			} else if (index.equals( "2038")) {
 				
+			} else if (index.equals( "2039")) {
+				
+			} else if (index.equals( "2040")) {
+
+			} else {
+				JOptionPane.showMessageDialog(null, "If you see this "
+						+ "something is screwed up");
+				try {
+					wait(100);
+				} catch (InterruptedException e) {
+				}
+				System.exit(1);
+			}
+
+		}
+		return "Error";
+	}
+	
+	public String GoogleOrg() {
+		if (graduateYearCB.getSelectedItem()=="0") {
+			String index = StaffCB.getSelectedItem().toString();
+			if (index.equals( "Elementary Teacher")) {
+				
+			} else if (index.equals( "Middle Teacher")) {
+							
+			} else if (index.equals( "High Teacher")) {
+			
+			} else if (index.equals( "Elementary Office")) {
+			
+			} else if (index.equals( "Middle Office")) {
+			
+			} else if (index.equals( "High Office")) {
+			
+			} else if (index.equals( "Maitence/Custodian")) {
+			
+			} else if (index.equals( "Bus Garage")) {
+			
+			} else if (index.equals( "Cafeteria")) {
+			
+			} else if (index.equals( "Board Office")) {
+			
+			} else {
+				JOptionPane.showMessageDialog(null, "If you see this "
+						+ "something is screwed up");
+				try {
+					wait(100);
+				} catch (InterruptedException e) {
+				}
+				System.exit(1);
+			}
+
+		} else if (StaffCB.getSelectedItem()!="0") {
+			String index = graduateYearCB.getSelectedItem().toString();
+			if (index.equals( "2019")) {
+				
+			} else if (index.equals( "2020")) {
+							
+			} else if (index.equals( "2021")) {
+			
+			} else if (index.equals( "2022")) {
+			
+			} else if (index.equals( "2023")) {
+			
+			} else if (index.equals( "2024")) {
+			
+			} else if (index.equals( "2025")) {
+			
+			} else if (index.equals( "2026")) {
+			
+			} else if (index.equals( "2027")) {
+			
+			} else if (index.equals( "2028")) {
+				
+			} else if (index.equals( "2029")) {
+				
+			} else if (index.equals( "2030")) {
+				
+			} else if (index.equals( "2031")) {
+				
+			} else if (index.equals( "2032")) {
+				
+			} else if (index.equals( "2033")) {
+				
+			} else if (index.equals( "2034")) {
+				
+			} else if (index.equals( "2035")) {
+				
+			} else if (index.equals( "2036")) {
+				
+			} else if (index.equals( "2037")) {
+				
 			} else if (index.equals( "2038")) {
+				
+			} else if (index.equals( "2039")) {
+				
+			} else if (index.equals( "2040")) {
 
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
