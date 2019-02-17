@@ -291,13 +291,19 @@ public class AccountGui extends JFrame {
 		    Matcher m = p.matcher(userNameTF.getText());
 		    boolean b = m.find();
 		    if (b == true) {
-		        JOptionPane.showMessageDialog(null, "Error:  An invalid character was entered.  Please fix and try again.");
+		        JOptionPane.showMessageDialog(null, "Error:  An invalid "
+		        		+ "character was entered.  Please fix and try "
+		        		+ "again.");
 			} else {
 				createdUserName = userName.getText();
 
 				String org = (String) StaffCB.getSelectedItem();
-				boolean createGA = createGoogleAccount(userName.getText(), firstName.getText(), lastName.getText(), password.getText(), org, false);
-				boolean createAD = createADAccount(userName.getText(), firstName.getText(), lastName.getText(), password.getText(), org, false);
+				boolean createGA = createGoogleAccount(userName.getText(),
+						firstName.getText(), lastName.getText(), 
+						password.getText(), org, false);
+				boolean createAD = createADAccount(userName.getText(), 
+						firstName.getText(), lastName.getText(), 
+						password.getText(), org, false);
 			}
 
 //			String s = null;
@@ -356,11 +362,15 @@ public class AccountGui extends JFrame {
 
 		}
 
-		private boolean createGoogleAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
+		private boolean createGoogleAccount(String userName, 
+				String firstName, String lastName, String password, 
+				String org, boolean ChangePassword) {
 			return true;
 		}
 
-		private boolean createADAccount(String userName, String firstName, String lastName, String password, String org, boolean ChangePassword) {
+		private boolean createADAccount(String userName, String firstName, 
+				String lastName, String password, String org,
+				boolean ChangePassword) {
 
 				String s;
 				String t = "Hello world";
@@ -430,7 +440,9 @@ public class AccountGui extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			try {
-				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
+				createdUserName = (Character.toString(
+						firstNameTF.getText().charAt(0)) + 
+						lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
 			}
@@ -452,7 +464,9 @@ public class AccountGui extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			try {
-				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
+				createdUserName = (Character.toString(
+						firstNameTF.getText().charAt(0)) + 
+						lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
 			}
@@ -474,7 +488,9 @@ public class AccountGui extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			try {
-				createdUserName = (Character.toString(firstNameTF.getText().charAt(0)) + lastNameTF.getText());
+				createdUserName = (Character.toString(
+						firstNameTF.getText().charAt(0)) + 
+						lastNameTF.getText());
 			} catch (Exception e1) {
 				createdUserName = "";
 			}
