@@ -1,24 +1,8 @@
-import javax.naming.directory.BasicAttribute;
-import javax.naming.directory.BasicAttributes;
-import javax.naming.directory.DirContext;
-import javax.naming.directory.ModificationItem;
 import javax.swing.*;	// Needed for Swing classes
 import java.awt.*;
 import java.awt.event.*; // Needed for ActionListener Interface
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.security.KeyStore.Entry.Attribute;
-import java.util.jar.Attributes;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Hashtable;
-import javax.naming.Context;
-import javax.naming.NamingException;
-import javax.naming.ldap.InitialLdapContext;
-import javax.naming.ldap.LdapContext;
-import javax.naming.ldap.StartTlsRequest;
-import javax.naming.ldap.StartTlsResponse;
 
 
 public class AccountGui extends JFrame {
@@ -193,6 +177,10 @@ public class AccountGui extends JFrame {
 		graduateYearCB.setEditable(true);
 		StaffCB = new JComboBox(staffArea);
 
+		graduateYearCB.addActionListener(new graduateYearListener());
+		StaffCB.addActionListener(new StaffListener());
+
+		
 		// Create JPanel objects and let the panel
 		// fields reference it.
 		panel = new JPanel();
@@ -273,7 +261,7 @@ public class AccountGui extends JFrame {
 
 
 	/**
-		rollButtonListener is an action listener class for
+		CreateUserListener is an action listener class for
 		the roll button.
 	*/
 
@@ -297,14 +285,26 @@ public class AccountGui extends JFrame {
 			} else {
 				createdUserName = userName.getText();
 
-				String org = (String) StaffCB.getSelectedItem();
+				String org = org();
 				boolean createGA = createGoogleAccount(userName.getText(),
-						firstName.getText(), lastName.getText(), 
-						password.getText(), org, false);
-				boolean createAD = createADAccount(userName.getText(), 
-						firstName.getText(), lastName.getText(), 
-						password.getText(), org, false);
+					firstName.getText(), lastName.getText(), 
+					password.getText(), org, false);
+
+				if (!createGA) {
+					JOptionPane.showMessageDialog(null, "Error:  Error creating Google Account ");
+				} else {
+				
+					boolean createAD = createADAccount(userName.getText(), 
+							firstName.getText(), lastName.getText(), 
+							password.getText(), org, false);
+					
+					if (!createAD) {
+						JOptionPane.showMessageDialog(null, "Error:  Error creating AD Account ");
+					}
+				
+					
 			}
+		}
 
 //			String s = null;
 //			
@@ -489,7 +489,112 @@ public class AccountGui extends JFrame {
 		}
 
 	}
+	
+	private class graduateYearListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+        	if(graduateYearCB.getSelectedItem()!="0")
+        		StaffCB.setSelectedIndex(0);
+		}
+	}
+	
+	private class StaffListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+//        	if(StaffCB.getSelectedItem()!="0")
+//        		graduateYearCB.setSelectedIndex(0);
+		}
+	}
 
+	public String ADOrg() {
+		if (graduateYearCB.getSelectedItem()=="0") {
+			String index = StaffCB.getSelectedItem().toString();
+			if (index.equals( "Elementary Teacher")) {
+				
+			} else if (index.equals( "Middle Teacher")) {
+							
+			} else if (index.equals( "High Teacher")) {
+			
+			} else if (index.equals( "Elementary Office")) {
+			
+			} else if (index.equals( "Middle Office")) {
+			
+			} else if (index.equals( "High Office")) {
+			
+			} else if (index.equals( "Maitence/Custodian")) {
+			
+			} else if (index.equals( "Bus Garage")) {
+			
+			} else if (index.equals( "Cafeteria")) {
+			
+			} else if (index.equals( "Board Office")) {
+			
+			} else {
+				JOptionPane.showMessageDialog(null, "If you see this "
+						+ "something is screwed up");
+				try {
+					wait(100);
+				} catch (InterruptedException e) {
+				}
+				System.exit(1);
+			}
+
+		} else if (StaffCB.getSelectedItem()!="0") {
+			String index = graduateYearCB.getSelectedItem().toString();
+			if (index.equals( "2019")) {
+				
+			} else if (index.equals( "2020")) {
+							
+			} else if (index.equals( "2021")) {
+			
+			} else if (index.equals( "2022")) {
+			
+			} else if (index.equals( "2023")) {
+			
+			} else if (index.equals( "2024")) {
+			
+			} else if (index.equals( "2025")) {
+			
+			} else if (index.equals( "2026")) {
+			
+			} else if (index.equals( "2027")) {
+			
+			} else if (index.equals( "2028")) {
+				
+			} else if (index.equals( "2029")) {
+				
+			} else if (index.equals( "2030")) {
+				
+			} else if (index.equals( "2031")) {
+				
+			} else if (index.equals( "2032")) {
+				
+			} else if (index.equals( "2033")) {
+				
+			} else if (index.equals( "2034")) {
+				
+			} else if (index.equals( "2035")) {
+				
+			} else if (index.equals( "2036")) {
+				
+			} else if (index.equals( "2037")) {
+				
+			} else if (index.equals( "2038")) {
+				
+			} else if (index.equals( "2038")) {
+
+			} else {
+				JOptionPane.showMessageDialog(null, "If you see this "
+						+ "something is screwed up");
+				try {
+					wait(100);
+				} catch (InterruptedException e) {
+				}
+				System.exit(1);
+			}
+
+		}
+		return "Error";
+	}
+	
 	/**
 		main method
 	*/

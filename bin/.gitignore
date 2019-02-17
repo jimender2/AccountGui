@@ -13,3 +13,7 @@
 /firstNameListener.class
 /lastNameListener.class
 /studentIDListener.class
+/AccountGui$graduateYearCB.class
+/AccountGui$graduateYearListener.class
+/AccountGui$GraduateListener.class
+/AccountGui$StaffListener.class
