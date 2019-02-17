@@ -365,36 +365,26 @@ public class AccountGui extends JFrame {
 		private boolean createGoogleAccount(String userName, 
 				String firstName, String lastName, String password, 
 				String org, boolean ChangePassword) {
-			return true;
+			try {
+				Process p = Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 
 		private boolean createADAccount(String userName, String firstName, 
 				String lastName, String password, String org,
 				boolean ChangePassword) {
 
-				String s;
-				String t = "Hello world";
-				try {
-					Process p1 = Runtime.getRuntime().exec("PowerShell -Command \"Add-Type -AssemblyName " 
-					+ "PresentationFramework;[System.Windows.MessageBox]::Show('" + t + "')");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				try {
-					Process p = Runtime.getRuntime().exec("PowerShell -Command powershell.exe " + userName + " " + firstName + " " + lastName + " " + password + " " + org + " " + ChangePassword);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-
-
-			
-			
-
-			boolean bool = true;
-			return bool;
+			try {
+				Process p = Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org + " " + ChangePassword);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 	}
 
