@@ -5,7 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.border.EtchedBorder;
 
-
 public class AccountGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -66,7 +65,7 @@ public class AccountGUI extends JFrame {
 	//declare JComboBox
 	private JComboBox graduateYearCB;	
 	private JComboBox StaffCB;
-	
+
 	//declare radio buttons
 	private JRadioButton Staff_1;
 	private JRadioButton Student;
@@ -112,7 +111,7 @@ public class AccountGUI extends JFrame {
 
 		// Display the window.
 		setVisible(true);
-	
+
 	}
 
 
@@ -128,7 +127,6 @@ public class AccountGUI extends JFrame {
 		exitButton.addActionListener(new exitButtonListener());
 		exitButton.setMnemonic(KeyEvent.VK_E);
 		exitButton.setToolTipText("Click here to Exit the Program");
-
 
 		//Set Labels and textfields
 		firstName = new JLabel("First Name");
@@ -169,7 +167,6 @@ public class AccountGUI extends JFrame {
 		graduateYearCB.addActionListener(new graduateYearListener());
 		StaffCB.addActionListener(new StaffListener());
 
-		
 		// Create JPanel objects and let the panel
 		// fields reference it.
 		panel = new JPanel();
@@ -239,39 +236,39 @@ public class AccountGUI extends JFrame {
 		ResetRight.add(RLastNameTF);
 		ResetRight.add(RNewPasswordTF);
 		ResetRight.add(RConfirmPasswordTF);
-		
+
 		choose = new JPanel();
 		panel.add(choose);
-				choose.setLayout(new BorderLayout(0, 0));
-								
-								panel_1 = new JPanel();
-								choose.add(panel_1, BorderLayout.NORTH);
-								panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-								
-								Staff_1 = new JRadioButton("Staff");
-								panel_1.add(Staff_1);
-								
-										buttonGroup.add(Staff_1);
-										Staff_1.setSelected(true);
-										
-										Student = new JRadioButton("Student");
-										panel_1.add(Student);
-										buttonGroup.add(Student);
-								
-								panel_2 = new JPanel();
-								choose.add(panel_2, BorderLayout.CENTER);
-										panel_2.setLayout(new BorderLayout(0, 0));
-								
-										// Create my buttons.
-										createUser = new JButton("Create User");
-										panel_2.add(createUser, BorderLayout.NORTH);
-										
-												// Add an action listener to the button.
-												createUser.addActionListener(new createUserListener());
-												
-														//set mnemonic and tooltip
-														createUser.setMnemonic(KeyEvent.VK_C);
-														createUser.setToolTipText("Click here to create the User");
+		choose.setLayout(new BorderLayout(0, 0));
+		
+		panel_1 = new JPanel();
+		choose.add(panel_1, BorderLayout.NORTH);
+		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+
+		Staff_1 = new JRadioButton("Staff");
+		panel_1.add(Staff_1);
+
+		buttonGroup.add(Staff_1);
+		Staff_1.setSelected(true);
+
+		Student = new JRadioButton("Student");
+		panel_1.add(Student);
+		buttonGroup.add(Student);
+
+		panel_2 = new JPanel();
+		choose.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BorderLayout(0, 0));
+
+		// Create my buttons.
+		createUser = new JButton("Create User");
+		panel_2.add(createUser, BorderLayout.NORTH);
+
+		// Add an action listener to the button.
+		createUser.addActionListener(new createUserListener());
+
+		//set mnemonic and tooltip
+		createUser.setMnemonic(KeyEvent.VK_C);
+		createUser.setToolTipText("Click here to create the User");
 
 		Staff_1.addActionListener(new Staff_1Listener());
 		Student.addActionListener(new StudentListener());
@@ -284,7 +281,7 @@ public class AccountGUI extends JFrame {
 		ResetUser.setMnemonic(KeyEvent.VK_R);
 		ResetUser.setToolTipText("Click here to Reset the User Password");		
 
-	}	
+	}
 
 
 	/**
@@ -303,34 +300,34 @@ public class AccountGUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			Pattern p = Pattern.compile("[\\W]");
-		    Matcher m = p.matcher(userNameTF.getText());
-		    boolean b = m.find();
-		    if (userNameTF.getText().equals(null)) {
-		    	JOptionPane.showMessageDialog(null, "Error:  Username is "
-		    			+ "empty.");
-		    	return;
+			Matcher m = p.matcher(userNameTF.getText());
+			boolean b = m.find();
+			if (userNameTF.getText().equals(null)) {
+				JOptionPane.showMessageDialog(null, "Error:  Username is "
+						+ "empty.");
+				return;
 			}
-		    if (passwordTF.getText().equals("")) {
-		    	JOptionPane.showMessageDialog(null, "Error:  Password is "
-		    			+ "empty.");
-		    	return;
+			if (passwordTF.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Error:  Password is "
+						+ "empty.");
+				return;
 			}
-		    if (firstNameTF.getText().equals("")) {
-		    	JOptionPane.showMessageDialog(null, "Error:  First Name is"
-		    			+ " empty.");
-		    	return;
-		    }
-		    if (lastNameTF.getText().equals("")) {
-		    	JOptionPane.showMessageDialog(null, "Error:  Last Name is "
-		    			+ "empty.");
-		    	return;
+			if (firstNameTF.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Error:  First Name is"
+						+ " empty.");
+				return;
 			}
-		    
-		    if (b == true) {
-		        JOptionPane.showMessageDialog(null, "Error:  An invalid "
-		        		+ "character was entered.  Please fix and try "
-		        		+ "again.");
-		        return;
+			if (lastNameTF.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Error:  Last Name is "
+						+ "empty.");
+				return;
+			}
+			
+			if (b == true) {
+				JOptionPane.showMessageDialog(null, "Error:  An invalid "
+						+ "character was entered.  Please fix and try "
+						+ "again.");
+				return;
 			} else {
 				createdUserName = userName.getText();
 
@@ -415,7 +412,8 @@ public class AccountGUI extends JFrame {
 				String firstName, String lastName, String password, 
 				String org, boolean ChangePassword) {
 			try {
-				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org);
+				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
+						lastName + " " + password + " " + org);
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -428,7 +426,8 @@ public class AccountGUI extends JFrame {
 				boolean ChangePassword) {
 
 			try {
-				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org + " " + ChangePassword);
+				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
+						lastName + " " + password + " " + org + " " + ChangePassword);
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -541,15 +540,15 @@ public class AccountGUI extends JFrame {
 	
 	private class graduateYearListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-        	//if(graduateYearCB.getSelectedItem()!="0")
-        		//StaffCB.setSelectedIndex(0);
+			//if(graduateYearCB.getSelectedItem()!="0")
+				//StaffCB.setSelectedIndex(0);
 		}
 	}
 	
 	private class StaffListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-        	//if(StaffCB.getSelectedItem()!="0")
-        		//graduateYearCB.setSelectedIndex(0);
+			//if(StaffCB.getSelectedItem()!="0")
+				//graduateYearCB.setSelectedIndex(0);
 		}
 	}
 
