@@ -81,9 +81,11 @@ public class AccountGUI extends JFrame {
 
 	String[] staffArea = { "", "Elementary Teacher",
 			"Middle Teacher", "High Teacher", "Elementary Office", 
-			"Middle Office", "High Office", "Maitence/Custodian",
-			"Bus Garage", "Cafeteria", "Board Office" };
+			"Middle Office", "High Office", "Maintenance/Custodian",
+			"Bus Garage", "Cafeteria", "Board Office", "Coach", 
+			"Board Member" };
 
+	String domain = ",OU=Accounts,DC=blackriver,DC=k12,DC=oh,DC=us";
 
 	/**
 		Constructor
@@ -120,7 +122,6 @@ public class AccountGUI extends JFrame {
 		and a button to a panel.
 	*/
 
-	@SuppressWarnings("unchecked")
 	private void buildPanel() {
 		createdUserName = "";
 		exitButton = new JButton("Exit");
@@ -181,7 +182,6 @@ public class AccountGUI extends JFrame {
 		ResetRight = new JPanel();
 
 		//Set Layouts of the panels
-
 		panel.setLayout(new GridLayout(2,1));
 		Create.setLayout(new BorderLayout());
 		CreateBoth.setLayout(new GridLayout(1,2));
@@ -281,6 +281,12 @@ public class AccountGUI extends JFrame {
 		ResetUser.setMnemonic(KeyEvent.VK_R);
 		ResetUser.setToolTipText("Click here to Reset the User Password");		
 
+		graduateYear.setVisible(false);
+		Staff.setVisible(true);
+		graduateYearCB.setVisible(false);
+		StaffCB.setVisible(true);
+		studentID.setVisible(false);
+		studentIDTF.setVisible(false);
 	}
 
 
@@ -302,7 +308,7 @@ public class AccountGUI extends JFrame {
 			Pattern p = Pattern.compile("[\\W]");
 			Matcher m = p.matcher(userNameTF.getText());
 			boolean b = m.find();
-			if (userNameTF.getText().equals(null)) {
+			if (userNameTF.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Error:  Username is "
 						+ "empty.");
 				return;
@@ -328,84 +334,29 @@ public class AccountGUI extends JFrame {
 						+ "character was entered.  Please fix and try "
 						+ "again.");
 				return;
-			} else {
-				createdUserName = userName.getText();
+			}
 
-				String org = ADOrg();
-				boolean createGA = createGoogleAccount(userName.getText(),
+			createdUserName = userName.getText();
+
+			String org = GoogleOrg();
+			boolean createGA = createGoogleAccount(userName.getText(),
+				firstName.getText(), lastName.getText(), 
+				password.getText(), org, false);
+
+			if (!createGA) {
+				JOptionPane.showMessageDialog(null, "Error:  Error creating Google Account ");
+				return;
+			}
+			
+			org = ADOrg();
+			boolean createAD = createADAccount(userName.getText(), 
 					firstName.getText(), lastName.getText(), 
 					password.getText(), org, false);
 
-				if (!createGA) {
-					JOptionPane.showMessageDialog(null, "Error:  Error creating Google Account ");
-				} else {
-				
-					boolean createAD = createADAccount(userName.getText(), 
-							firstName.getText(), lastName.getText(), 
-							password.getText(), org, false);
-					
-					if (!createAD) {
-						JOptionPane.showMessageDialog(null, "Error:  Error creating AD Account ");
-					}
-				
-					
+			if (!createAD) {
+				JOptionPane.showMessageDialog(null, "Error:  Error creating AD Account ");
+				return;
 			}
-		}
-
-//			String s = null;
-//			
-//			String lname = lastNameTF.getText();
-//			String fname = firstNameTF.getText();
-//
-//			panel.setBackground(Color.YELLOW);
-//			
-//			if (fname.length() == 0 || lname.length() == 0) {
-//				System.out.println("error");
-//				fname.replaceAll("g", "d");
-//				
-//				char fInitial = fname.charAt(0);
-//				System.out.println(fInitial);
-//				
-//				String userName = fInitial + lname;
-//
-//			} else {
-//				
-//			}
-
-
-
-//			try {
-//					
-//				// run the Unix "ps -ef" command
-//				// using the Runtime exec method:
-//				Process p1 = Runtime.getRuntime().exec("PowerShell -Command \"Add-Type -AssemblyName " 
-//				+ "PresentationFramework;[System.Windows.MessageBox]::Show('Hello World')");
-//				Process p = Runtime.getRuntime().exec("sndvol.exe -f\r\n");
-//
-//				
-//				BufferedReader stdInput = new BufferedReader(new 
-//						InputStreamReader(p.getInputStream()));
-//
-//				BufferedReader stdError = new BufferedReader(new 
-//						InputStreamReader(p.getErrorStream()));
-//
-//				// read the output from the command
-//				while ((s = stdInput.readLine()) != null) {
-//					System.out.println(s);
-//				}
-//					
-//				// read any errors from the attempted command
-//				while ((s = stdError.readLine()) != null) {
-//					System.out.println(s);
-//				}
-//				
-//			} catch (IOException e1) {
-//				System.out.println("exception happened - here's what I know: ");
-//				e1.printStackTrace();
-//			}
-
-
-
 		}
 
 		private boolean createGoogleAccount(String userName, 
@@ -559,7 +510,10 @@ public class AccountGUI extends JFrame {
 				Staff.setVisible(true);
 				graduateYearCB.setVisible(false);
 				StaffCB.setVisible(true);
-				System.out.println("this is a test");
+				studentID.setVisible(false);
+				studentIDTF.setVisible(false);
+				graduateYearCB.setSelectedIndex(0);
+				studentIDTF.setText("");
 			}
 		}
 	}
@@ -571,36 +525,39 @@ public class AccountGUI extends JFrame {
 				Staff.setVisible(false);
 				graduateYearCB.setVisible(true);
 				StaffCB.setVisible(false);
-				System.out.println("this is a not a test");
+				studentID.setVisible(true);
+				studentIDTF.setVisible(true);
+				StaffCB.setSelectedIndex(0);
 			}
 		}
 	}
 
 	public String ADOrg() {
 		if (graduateYearCB.getSelectedItem().toString().equals("")) {
-			System.out.println("fuck");
 
 			String index = StaffCB.getSelectedItem().toString();
 			if (index.equals( "Elementary Teacher")) {
-				return "";
+				return "OU=EL Teachers,OU=Teachers," + domain;
 			} else if (index.equals( "Middle Teacher")) {
-				return "";
+				return "OU=MS Teachers,OU=Teachers," + domain;
 			} else if (index.equals( "High Teacher")) {
-				return "";
+				return "OU=HS Teachers,OU=Teachers," + domain;
 			} else if (index.equals( "Elementary Office")) {
-				return "";
+				return "OU=HS,OU=Staff," + domain;
 			} else if (index.equals( "Middle Office")) {
-				return "";
+				return "OU=HS,OU=Staff," + domain;
 			} else if (index.equals( "High Office")) {
-				return "";
-			} else if (index.equals( "Maitence/Custodian")) {
-				return "";
+				return "OU=HS,OU=Staff," + domain;
+			} else if (index.equals( "Maintenance/Custodian")) {
+				return "OU=HS,OU=Staff," + domain;
 			} else if (index.equals( "Bus Garage")) {
-				return "";
+				return "OU=HS,OU=Staff," + domain;
 			} else if (index.equals( "Cafeteria")) {
-				return "";
+				return "OU=HS,OU=Staff," + domain;
 			} else if (index.equals( "Board Office")) {
-				return "";
+				return "OU=HS,OU=Staff," + domain;
+			} else if (index.equals( "Board Member")) {
+				return "OU=HS,OU=Staff," + domain;
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
@@ -610,49 +567,49 @@ public class AccountGUI extends JFrame {
 		} else if (!StaffCB.getSelectedItem().toString().equals("")) {
 			String index = graduateYearCB.getSelectedItem().toString();
 			if (index.equals( "2019")) {
-				return "";
+				return "OU=2019,OU=HS,OU=Students," + domain;
 			} else if (index.equals( "2020")) {
-				return "";
+				return "OU=2020,OU=HS,OU=Students," + domain;
 			} else if (index.equals( "2021")) {
-				return "";
+				return "OU=2021,OU=HS,OU=Students," + domain;
 			} else if (index.equals( "2022")) {
-				return "";
+				return "OU=2022,OU=HS,OU=Students," + domain;
 			} else if (index.equals( "2023")) {
-				return "";
+				return "OU=2023,OU=MS,OU=Students," + domain;
 			} else if (index.equals( "2024")) {
-				return "";
+				return "OU=2024,OU=MS,OU=Students," + domain;
 			} else if (index.equals( "2025")) {
-				return "";
+				return "OU=2025,OU=MS,OU=Students," + domain;
 			} else if (index.equals( "2026")) {
-				return "";
+				return "OU=2026,OU=ES,OU=Students," + domain;
 			} else if (index.equals( "2027")) {
-				return "";
+				return "OU=2027,OU=ES,OU=Students," + domain;
 			} else if (index.equals( "2028")) {
-				return "";
+				return "OU=2028,OU=ES,OU=Students," + domain;
 			} else if (index.equals( "2029")) {
-				return "";
+				return "OU=2029,OU=ES,OU=Students," + domain;
 			} else if (index.equals( "2030")) {
-				return "";
+				return "OU=2030,OU=ES,OU=Students," + domain;
 			} else if (index.equals( "2031")) {
-				return "";
-			} else if (index.equals( "2032")) {
-				return "";
-			} else if (index.equals( "2033")) {
-				return "";
-			} else if (index.equals( "2034")) {
-				return "";
-			} else if (index.equals( "2035")) {
-				return "";
-			} else if (index.equals( "2036")) {
-				return "";
-			} else if (index.equals( "2037")) {
-				return "";
-			} else if (index.equals( "2038")) {
-				return "";
-			} else if (index.equals( "2039")) {
-				return "";
-			} else if (index.equals( "2040")) {
-				return "";
+				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2032")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2033")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2034")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2035")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2036")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2037")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2038")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2039")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
+//			} else if (index.equals( "2040")) {
+//				return "OU=2019,OU=HS,OU=Students," + domain;
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
@@ -667,25 +624,27 @@ public class AccountGUI extends JFrame {
 		if (graduateYearCB.getSelectedItem()=="0") {
 			String index = StaffCB.getSelectedItem().toString();
 			if (index.equals( "Elementary Teacher")) {
-				return "";
+				return "Staff/Teachers";
 			} else if (index.equals( "Middle Teacher")) {
-				return "";
+				return "Staff/Teachers";
 			} else if (index.equals( "High Teacher")) {
-				return "";
+				return "Staff/Teachers";
 			} else if (index.equals( "Elementary Office")) {
-				return "";
+				return "Staff/Support";
 			} else if (index.equals( "Middle Office")) {
-				return "";
+				return "Staff/Support";
 			} else if (index.equals( "High Office")) {
-				return "";
-			} else if (index.equals( "Maitence/Custodian")) {
-				return "";
+				return "Staff/Support";
+			} else if (index.equals( "Maintenance/Custodian")) {
+				return "Staff/Maintenance";
 			} else if (index.equals( "Bus Garage")) {
-				return "";
+				return "Staff/Bus Drivers";
 			} else if (index.equals( "Cafeteria")) {
-				return "";
+				return "Staff/Kitchen";
 			} else if (index.equals( "Board Office")) {
-				return "";
+				return "Staff/Support";
+			} else if (index.equals( "Board Member")) {
+				return "Staff/Board Members";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
@@ -695,49 +654,49 @@ public class AccountGUI extends JFrame {
 		} else if (StaffCB.getSelectedItem()!="0") {
 			String index = graduateYearCB.getSelectedItem().toString();
 			if (index.equals( "2019")) {
-				return "";
+				return "Students/2019";
 			} else if (index.equals( "2020")) {
-				return "";
+				return "Students/2020";
 			} else if (index.equals( "2021")) {
-				return "";
+				return "Students/2021";
 			} else if (index.equals( "2022")) {
-				return "";
+				return "Students/2022";
 			} else if (index.equals( "2023")) {
-				return "";
+				return "Students/2023";
 			} else if (index.equals( "2024")) {
-				return "";
+				return "Students/2024";
 			} else if (index.equals( "2025")) {
-				return "";
+				return "Students/2025";
 			} else if (index.equals( "2026")) {
-				return "";
+				return "Students/2026";
 			} else if (index.equals( "2027")) {
-				return "";
+				return "Students/2027";
 			} else if (index.equals( "2028")) {
-				return "";
+				return "Students/2028";
 			} else if (index.equals( "2029")) {
-				return "";
+				return "Students/2029";
 			} else if (index.equals( "2030")) {
-				return "";
+				return "Students/2030";
 			} else if (index.equals( "2031")) {
-				return "";
-			} else if (index.equals( "2032")) {
-				return "";
-			} else if (index.equals( "2033")) {
-				return "";
-			} else if (index.equals( "2034")) {
-				return "";
-			} else if (index.equals( "2035")) {
-				return "";
-			} else if (index.equals( "2036")) {
-				return "";
-			} else if (index.equals( "2037")) {
-				return "";
-			} else if (index.equals( "2038")) {
-				return "";
-			} else if (index.equals( "2039")) {
-				return "";
-			} else if (index.equals( "2040")) {
-				return "";
+				return "Students/2031";
+//			} else if (index.equals( "2032")) {
+//				return "Students/2032";
+//			} else if (index.equals( "2033")) {
+//				return "Students/2033";
+//			} else if (index.equals( "2034")) {
+//				return "Students/2034";
+//			} else if (index.equals( "2035")) {
+//				return "Students/2035";
+//			} else if (index.equals( "2036")) {
+//				return "Students/2036";
+//			} else if (index.equals( "2037")) {
+//				return "Students/2037";
+//			} else if (index.equals( "2038")) {
+//				return "Students/2038";
+//			} else if (index.equals( "2039")) {
+//				return "Students/2039";
+//			} else if (index.equals( "2040")) {
+//				return "Students/2040";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
