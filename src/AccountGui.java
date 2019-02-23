@@ -50,8 +50,6 @@ public class AccountGui extends JFrame {
 	private JLabel RLastName;
 	private JLabel RnewPassword;
 	private JLabel RconfirmNewPassword;
-
-	private JLabel blank;
 	private JLabel blank1;
 
 	//declare JTextField
@@ -80,6 +78,10 @@ public class AccountGui extends JFrame {
 			"Middle Teacher", "High Teacher", "Elementary Office", 
 			"Middle Office", "High Office", "Maitence/Custodian",
 			"Bus Garage", "Cafeteria", "Board Office" };
+	private JPanel choose;
+	private JRadioButton Staff_1;
+	private JRadioButton Student;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 
 	/**
@@ -104,7 +106,7 @@ public class AccountGui extends JFrame {
 		buildPanel();
 
 		// Add the panel to the frame's content pane.
-		add(panel);
+		getContentPane().add(panel);
 
 		// Display the window.
 		setVisible(true);
@@ -166,8 +168,6 @@ public class AccountGui extends JFrame {
 		RLastNameTF = new JTextField();
 		RNewPasswordTF = new JTextField();
 		RConfirmPasswordTF = new JTextField();
-
-		blank = new JLabel("");
 
 		firstNameTF.addActionListener(new firstNameListener());
 		lastNameTF.addActionListener(new lastNameListener());
@@ -253,8 +253,19 @@ public class AccountGui extends JFrame {
 
 		Create.add(createUser, BorderLayout.SOUTH);
 		Reset.add(ResetUser, BorderLayout.SOUTH);
+		
+		choose = new JPanel();
+		panel.add(choose);
+		
+		Staff_1 = new JRadioButton("Staff");
+		buttonGroup.add(Staff_1);
+		Staff_1.setSelected(true);
+		choose.add(Staff_1);
+		
+		Student = new JRadioButton("Student");
+		buttonGroup.add(Student);
+		choose.add(Student);
 		Exit.add(exitButton, BorderLayout.SOUTH);
-		panel.add(blank);
 		panel.add(Exit);
 
 	}	
@@ -499,8 +510,8 @@ public class AccountGui extends JFrame {
 	
 	private class StaffListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-//        	if(StaffCB.getSelectedItem()!="0")
-//        		graduateYearCB.setSelectedIndex(0);
+        	if(StaffCB.getSelectedItem()!="0")
+        		graduateYearCB.setSelectedIndex(0);
 		}
 	}
 
