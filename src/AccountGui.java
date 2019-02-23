@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*; // Needed for ActionListener Interface
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.border.EtchedBorder;
 
 
 public class AccountGui extends JFrame {
@@ -13,6 +14,7 @@ public class AccountGui extends JFrame {
 	private JPanel panel;
 	private JPanel Create;
 	private JPanel Reset;
+	private JPanel choose;
 	private JPanel Exit;
 	private JPanel CreateBoth;
 	private JPanel CreateLeft;
@@ -20,9 +22,8 @@ public class AccountGui extends JFrame {
 	private JPanel ResetBoth;
 	private JPanel ResetLeft;
 	private JPanel ResetRight;
-
-	//menu stuff
-	//private JMenuBar bar;
+	private JPanel panel_1;
+	private JPanel panel_2;
 
 	//declare buttons
 	private JButton createUser;
@@ -30,11 +31,8 @@ public class AccountGui extends JFrame {
 	private JButton exitButton;
 
 	//declare window size
-	private final int WINDOW_WIDTH = 750;
-	private final int WINDOW_HEIGHT = 500;
-
-	//declare imageIcons
-	//private ImageIcon di1;
+	private static final int WINDOW_WIDTH = 750;
+	private static final int WINDOW_HEIGHT = 500;
 
 	//declare JLabel
 	private JLabel firstName;
@@ -68,6 +66,13 @@ public class AccountGui extends JFrame {
 	//declare JComboBox
 	private JComboBox graduateYearCB;	
 	private JComboBox StaffCB;
+	
+	//declare radio buttons
+	private JRadioButton Staff_1;
+	private JRadioButton Student;
+
+	//declare button group
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	String createdUserName;
 
@@ -78,10 +83,6 @@ public class AccountGui extends JFrame {
 			"Middle Teacher", "High Teacher", "Elementary Office", 
 			"Middle Office", "High Office", "Maitence/Custodian",
 			"Bus Garage", "Cafeteria", "Board Office" };
-	private JPanel choose;
-	private JRadioButton Staff_1;
-	private JRadioButton Student;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 
 	/**
@@ -119,26 +120,13 @@ public class AccountGui extends JFrame {
 		and a button to a panel.
 	*/
 
+	@SuppressWarnings("unchecked")
 	private void buildPanel() {
 		createdUserName = "";
-
-		// Create my buttons.
-		createUser = new JButton("Create User");
 		exitButton = new JButton("Exit");
-		ResetUser = new JButton("Reset Password");
-
-		// Add an action listener to the button.
-		createUser.addActionListener(new createUserListener());
 		exitButton.addActionListener(new exitButtonListener());
-		ResetUser.addActionListener(new ResetUserButtonListener());
-
-		//set mnemonic and tooltip
-		createUser.setMnemonic(KeyEvent.VK_C);
-		createUser.setToolTipText("Click here to create the User");
 		exitButton.setMnemonic(KeyEvent.VK_E);
 		exitButton.setToolTipText("Click here to Exit the Program");
-		ResetUser.setMnemonic(KeyEvent.VK_R);
-		ResetUser.setToolTipText("Click here to Reset the User Password");		
 
 
 		//Set Labels and textfields
@@ -173,9 +161,9 @@ public class AccountGui extends JFrame {
 		lastNameTF.addActionListener(new lastNameListener());
 
 		//declare JComboBoxes
-		graduateYearCB = new JComboBox(graduateYears);
+		graduateYearCB = new JComboBox<String>(graduateYears);
 		graduateYearCB.setEditable(true);
-		StaffCB = new JComboBox(staffArea);
+		StaffCB = new JComboBox<String>(staffArea);
 
 		graduateYearCB.addActionListener(new graduateYearListener());
 		StaffCB.addActionListener(new StaffListener());
@@ -250,23 +238,46 @@ public class AccountGui extends JFrame {
 		ResetRight.add(RLastNameTF);
 		ResetRight.add(RNewPasswordTF);
 		ResetRight.add(RConfirmPasswordTF);
-
-		Create.add(createUser, BorderLayout.SOUTH);
-		Reset.add(ResetUser, BorderLayout.SOUTH);
 		
 		choose = new JPanel();
 		panel.add(choose);
-		
-		Staff_1 = new JRadioButton("Staff");
-		buttonGroup.add(Staff_1);
-		Staff_1.setSelected(true);
-		choose.add(Staff_1);
-		
-		Student = new JRadioButton("Student");
-		buttonGroup.add(Student);
-		choose.add(Student);
+				choose.setLayout(new BorderLayout(0, 0));
+								
+								panel_1 = new JPanel();
+								choose.add(panel_1, BorderLayout.NORTH);
+								panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+								
+								Staff_1 = new JRadioButton("Staff");
+								panel_1.add(Staff_1);
+								
+										buttonGroup.add(Staff_1);
+										Staff_1.setSelected(true);
+										
+										Student = new JRadioButton("Student");
+										panel_1.add(Student);
+										buttonGroup.add(Student);
+								
+								panel_2 = new JPanel();
+								choose.add(panel_2, BorderLayout.CENTER);
+										panel_2.setLayout(new BorderLayout(0, 0));
+								
+										// Create my buttons.
+										createUser = new JButton("Create User");
+										panel_2.add(createUser, BorderLayout.NORTH);
+										
+												// Add an action listener to the button.
+												createUser.addActionListener(new createUserListener());
+												
+														//set mnemonic and tooltip
+														createUser.setMnemonic(KeyEvent.VK_C);
+														createUser.setToolTipText("Click here to create the User");
 		Exit.add(exitButton, BorderLayout.SOUTH);
 		panel.add(Exit);
+		ResetUser = new JButton("Reset Password");
+		Exit.add(ResetUser, BorderLayout.NORTH);
+		ResetUser.addActionListener(new ResetUserButtonListener());
+		ResetUser.setMnemonic(KeyEvent.VK_R);
+		ResetUser.setToolTipText("Click here to Reset the User Password");		
 
 	}	
 
@@ -377,7 +388,7 @@ public class AccountGui extends JFrame {
 				String firstName, String lastName, String password, 
 				String org, boolean ChangePassword) {
 			try {
-				Process p = Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org);
+				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org);
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -390,7 +401,7 @@ public class AccountGui extends JFrame {
 				boolean ChangePassword) {
 
 			try {
-				Process p = Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org + " " + ChangePassword);
+				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " + lastName + " " + password + " " + org + " " + ChangePassword);
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
