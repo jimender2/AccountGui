@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import javax.swing.border.EtchedBorder;
 
 
-public class AccountGui extends JFrame {
+public class AccountGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -76,8 +76,9 @@ public class AccountGui extends JFrame {
 
 	String createdUserName;
 
-	String[] graduateYears = { "", "2019", "2020", "2021",
-			"2022", "2023", "2024" };
+	String[] graduateYears = { "", "2019", "2020", "2021", "2022", "2023",
+			"2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031",
+			"2032"};
 
 	String[] staffArea = { "", "Elementary Teacher",
 			"Middle Teacher", "High Teacher", "Elementary Office", 
@@ -89,7 +90,7 @@ public class AccountGui extends JFrame {
 		Constructor
 	*/
 
-	public AccountGui() {
+	public AccountGUI() {
 
 		// Set the Custom image
 		setIconImage(new ImageIcon("logo.png").getImage());
@@ -271,6 +272,10 @@ public class AccountGui extends JFrame {
 														//set mnemonic and tooltip
 														createUser.setMnemonic(KeyEvent.VK_C);
 														createUser.setToolTipText("Click here to create the User");
+
+		Staff_1.addActionListener(new Staff_1Listener());
+		Student.addActionListener(new StudentListener());
+
 		Exit.add(exitButton, BorderLayout.SOUTH);
 		panel.add(Exit);
 		ResetUser = new JButton("Reset Password");
@@ -284,7 +289,7 @@ public class AccountGui extends JFrame {
 
 	/**
 		CreateUserListener is an action listener class for
-		the roll button.
+		the create button.
 	*/
 
 	private class createUserListener implements ActionListener {
@@ -296,14 +301,36 @@ public class AccountGui extends JFrame {
 		*/
 
 		public void actionPerformed(ActionEvent e) {
-	
+
 			Pattern p = Pattern.compile("[\\W]");
 		    Matcher m = p.matcher(userNameTF.getText());
 		    boolean b = m.find();
+		    if (userNameTF.getText().equals(null)) {
+		    	JOptionPane.showMessageDialog(null, "Error:  Username is "
+		    			+ "empty.");
+		    	return;
+			}
+		    if (passwordTF.getText().equals("")) {
+		    	JOptionPane.showMessageDialog(null, "Error:  Password is "
+		    			+ "empty.");
+		    	return;
+			}
+		    if (firstNameTF.getText().equals("")) {
+		    	JOptionPane.showMessageDialog(null, "Error:  First Name is"
+		    			+ " empty.");
+		    	return;
+		    }
+		    if (lastNameTF.getText().equals("")) {
+		    	JOptionPane.showMessageDialog(null, "Error:  Last Name is "
+		    			+ "empty.");
+		    	return;
+			}
+		    
 		    if (b == true) {
 		        JOptionPane.showMessageDialog(null, "Error:  An invalid "
 		        		+ "character was entered.  Please fix and try "
 		        		+ "again.");
+		        return;
 			} else {
 				createdUserName = userName.getText();
 
@@ -514,20 +541,46 @@ public class AccountGui extends JFrame {
 	
 	private class graduateYearListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-        	if(graduateYearCB.getSelectedItem()!="0")
-        		StaffCB.setSelectedIndex(0);
+        	//if(graduateYearCB.getSelectedItem()!="0")
+        		//StaffCB.setSelectedIndex(0);
 		}
 	}
 	
 	private class StaffListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-        	if(StaffCB.getSelectedItem()!="0")
-        		graduateYearCB.setSelectedIndex(0);
+        	//if(StaffCB.getSelectedItem()!="0")
+        		//graduateYearCB.setSelectedIndex(0);
+		}
+	}
+
+	private class Staff_1Listener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (Staff_1.isSelected()) {
+				graduateYear.setVisible(false);
+				Staff.setVisible(true);
+				graduateYearCB.setVisible(false);
+				StaffCB.setVisible(true);
+				System.out.println("this is a test");
+			}
+		}
+	}
+
+	private class StudentListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (Student.isSelected()) {
+				graduateYear.setVisible(true);
+				Staff.setVisible(false);
+				graduateYearCB.setVisible(true);
+				StaffCB.setVisible(false);
+				System.out.println("this is a not a test");
+			}
 		}
 	}
 
 	public String ADOrg() {
-		if (graduateYearCB.getSelectedItem()=="0") {
+		if (graduateYearCB.getSelectedItem().toString().equals("")) {
+			System.out.println("fuck");
+
 			String index = StaffCB.getSelectedItem().toString();
 			if (index.equals( "Elementary Teacher")) {
 				return "";
@@ -552,14 +605,10 @@ public class AccountGui extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
-				try {
-					wait(100);
-				} catch (InterruptedException e) {
-				}
 				System.exit(1);
 			}
 
-		} else if (StaffCB.getSelectedItem()!="0") {
+		} else if (!StaffCB.getSelectedItem().toString().equals("")) {
 			String index = graduateYearCB.getSelectedItem().toString();
 			if (index.equals( "2019")) {
 				return "";
@@ -608,10 +657,6 @@ public class AccountGui extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
-				try {
-					wait(100);
-				} catch (InterruptedException e) {
-				}
 				System.exit(1);
 			}
 
@@ -645,10 +690,6 @@ public class AccountGui extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
-				try {
-					wait(100);
-				} catch (InterruptedException e) {
-				}
 				System.exit(1);
 			}
 
@@ -701,10 +742,6 @@ public class AccountGui extends JFrame {
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up");
-				try {
-					wait(100);
-				} catch (InterruptedException e) {
-				}
 				System.exit(1);
 			}
 
@@ -717,7 +754,7 @@ public class AccountGui extends JFrame {
 	*/
 
 	public static void main(String[] args) {
-		new AccountGui();
+		new AccountGUI();
 	}
 
 
