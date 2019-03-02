@@ -363,8 +363,10 @@ public class AccountGUI extends JFrame {
 				String firstName, String lastName, String password, 
 				String org, boolean ChangePassword) {
 			try {
-				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
-						lastName + " " + password + " " + org);
+//				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
+//						lastName + " " + password + " " + org);
+				System.out.println("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
+				lastName + " " + password + " " + org);
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -377,7 +379,9 @@ public class AccountGUI extends JFrame {
 				boolean ChangePassword) {
 
 			try {
-				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
+//				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
+//						lastName + " " + password + " " + org + " " + ChangePassword);
+				System.out.println("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
 						lastName + " " + password + " " + org + " " + ChangePassword);
 				return true;
 			} catch (Exception e) {
@@ -560,7 +564,7 @@ public class AccountGUI extends JFrame {
 				return "OU=HS,OU=Staff," + domain;
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
-						+ "something is screwed up");
+						+ "something is screwed up3");
 				System.exit(1);
 			}
 
@@ -612,7 +616,7 @@ public class AccountGUI extends JFrame {
 //				return "OU=2019,OU=HS,OU=Students," + domain;
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
-						+ "something is screwed up");
+						+ "something is screwed up4");
 				System.exit(1);
 			}
 
@@ -623,6 +627,8 @@ public class AccountGUI extends JFrame {
 	public String GoogleOrg() {
 		if (graduateYearCB.getSelectedItem()=="0") {
 			String index = StaffCB.getSelectedItem().toString();
+			System.out.println(index);
+
 			if (index.equals( "Elementary Teacher")) {
 				return "Staff/Teachers";
 			} else if (index.equals( "Middle Teacher")) {
@@ -647,7 +653,7 @@ public class AccountGUI extends JFrame {
 				return "Staff/Board Members";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
-						+ "something is screwed up");
+						+ "something is screwed up1");
 				System.exit(1);
 			}
 
@@ -699,7 +705,7 @@ public class AccountGUI extends JFrame {
 //				return "Students/2040";
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
-						+ "something is screwed up");
+						+ "something is screwed up2");
 				System.exit(1);
 			}
 
