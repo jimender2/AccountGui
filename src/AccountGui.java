@@ -663,8 +663,7 @@ public class AccountGUI extends JFrame {
 
 		} else if (StaffCB.getSelectedItem()=="0") {
 			String index = (String)graduateYearCB.getSelectedItem();//.toString();
-            int count = graduateYearCB.getItemCount();
-System.out.println(graduateYearCB.getItemAt(count));
+
 			if (index.equals( "2019")) {
 				return "Students/2019";
 			} else if (index.equals( "2020")) {
