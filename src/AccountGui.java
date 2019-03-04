@@ -167,7 +167,6 @@ public class AccountGUI extends JFrame {
 		graduateYearCB = new JComboBox<String>(graduateYears);
 		graduateYearCB.setEditable(true);
 		StaffCB = new JComboBox<String>(staffArea);
-		StaffCB.setEditable(true);
 
 		graduateYearCB.addActionListener(new graduateYearListener());
 		StaffCB.addActionListener(new StaffListener());
@@ -344,8 +343,8 @@ public class AccountGUI extends JFrame {
 
 			String org = GoogleOrg();
 			boolean createGA = createGoogleAccount(userNameTF.getText(),
-				firstNameTF.getText(), lastNameTF.getText(), 
-				passwordTF.getText(), org, false);
+					firstNameTF.getText(), lastNameTF.getText(), 
+					passwordTF.getText(), org, false);
 
 			if (!createGA) {
 				JOptionPane.showMessageDialog(null, "Error:  Error creating Google Account ");
@@ -353,9 +352,9 @@ public class AccountGUI extends JFrame {
 			}
 			
 			org = ADOrg();
-			boolean createAD = createADAccount(userName.getText(), 
-					firstName.getText(), lastName.getText(), 
-					password.getText(), org, false);
+			boolean createAD = createADAccount(userNameTF.getText(), 
+					firstNameTF.getText(), lastNameTF.getText(), 
+					passwordTF.getText(), org, false);
 
 			if (!createAD) {
 				JOptionPane.showMessageDialog(null, "Error:  Error creating AD Account ");
@@ -367,10 +366,8 @@ public class AccountGUI extends JFrame {
 				String firstName, String lastName, String password, 
 				String org, boolean ChangePassword) {
 			try {
-//				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
-//						lastName + " " + password + " " + org);
-				System.out.println("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
-				lastName + " " + password + " " + org);
+				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
+						lastName + " " + password + " " + org);
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -383,9 +380,7 @@ public class AccountGUI extends JFrame {
 				boolean ChangePassword) {
 
 			try {
-//				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
-//						lastName + " " + password + " " + org + " " + ChangePassword);
-				System.out.println("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
+				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
 						lastName + " " + password + " " + org + " " + ChangePassword);
 				return true;
 			} catch (Exception e) {
@@ -572,7 +567,7 @@ public class AccountGUI extends JFrame {
 				System.exit(1);
 			}
 
-		} else if (!StaffCB.getSelectedItem().toString().equals("")) {
+		} else if (StaffCB.getSelectedItem().toString().equals("")) {
 			String index = graduateYearCB.getSelectedItem().toString();
 			if (index.equals( "2019")) {
 				return "OU=2019,OU=HS,OU=Students" + domain;
@@ -629,7 +624,7 @@ public class AccountGUI extends JFrame {
 	}
 	
 	public String GoogleOrg() {
-		if (graduateYearCB.getSelectedItem()=="0") {
+		if (graduateYearCB.getSelectedItem().toString().equals("")) {
 			String index = StaffCB.getSelectedItem().toString();
 			System.out.println(index);
 
@@ -661,8 +656,8 @@ public class AccountGUI extends JFrame {
 				System.exit(1);
 			}
 
-		} else if (StaffCB.getSelectedItem()=="0") {
-			String index = (String)graduateYearCB.getSelectedItem();//.toString();
+		} else if (StaffCB.getSelectedItem().toString().equals("")) {
+			String index = (String)graduateYearCB.getSelectedItem();
 
 			if (index.equals( "2019")) {
 				return "Students/2019";
