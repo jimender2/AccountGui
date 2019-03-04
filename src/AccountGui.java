@@ -48,6 +48,8 @@ public class AccountGUI extends JFrame {
 	private JLabel RnewPassword;
 	private JLabel RconfirmNewPassword;
 	private JLabel blank1;
+	
+	private JLabel holding;
 
 	//declare JTextField
 	private JTextField firstNameTF;
@@ -157,6 +159,7 @@ public class AccountGUI extends JFrame {
 		RNewPasswordTF = new JTextField();
 		RConfirmPasswordTF = new JTextField();
 
+		holding = new JLabel();
 		firstNameTF.addActionListener(new firstNameListener());
 		lastNameTF.addActionListener(new lastNameListener());
 
@@ -164,6 +167,7 @@ public class AccountGUI extends JFrame {
 		graduateYearCB = new JComboBox<String>(graduateYears);
 		graduateYearCB.setEditable(true);
 		StaffCB = new JComboBox<String>(staffArea);
+		StaffCB.setEditable(true);
 
 		graduateYearCB.addActionListener(new graduateYearListener());
 		StaffCB.addActionListener(new StaffListener());
@@ -339,9 +343,9 @@ public class AccountGUI extends JFrame {
 			createdUserName = userName.getText();
 
 			String org = GoogleOrg();
-			boolean createGA = createGoogleAccount(userName.getText(),
-				firstName.getText(), lastName.getText(), 
-				password.getText(), org, false);
+			boolean createGA = createGoogleAccount(userNameTF.getText(),
+				firstNameTF.getText(), lastNameTF.getText(), 
+				passwordTF.getText(), org, false);
 
 			if (!createGA) {
 				JOptionPane.showMessageDialog(null, "Error:  Error creating Google Account ");
@@ -541,27 +545,27 @@ public class AccountGUI extends JFrame {
 
 			String index = StaffCB.getSelectedItem().toString();
 			if (index.equals( "Elementary Teacher")) {
-				return "OU=EL Teachers,OU=Teachers," + domain;
+				return "OU=EL Teachers,OU=Teachers" + domain;
 			} else if (index.equals( "Middle Teacher")) {
-				return "OU=MS Teachers,OU=Teachers," + domain;
+				return "OU=MS Teachers,OU=Teachers" + domain;
 			} else if (index.equals( "High Teacher")) {
-				return "OU=HS Teachers,OU=Teachers," + domain;
+				return "OU=HS Teachers,OU=Teachers" + domain;
 			} else if (index.equals( "Elementary Office")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else if (index.equals( "Middle Office")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else if (index.equals( "High Office")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else if (index.equals( "Maintenance/Custodian")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else if (index.equals( "Bus Garage")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else if (index.equals( "Cafeteria")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else if (index.equals( "Board Office")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else if (index.equals( "Board Member")) {
-				return "OU=HS,OU=Staff," + domain;
+				return "OU=HS,OU=Staff" + domain;
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up3");
@@ -571,49 +575,49 @@ public class AccountGUI extends JFrame {
 		} else if (!StaffCB.getSelectedItem().toString().equals("")) {
 			String index = graduateYearCB.getSelectedItem().toString();
 			if (index.equals( "2019")) {
-				return "OU=2019,OU=HS,OU=Students," + domain;
+				return "OU=2019,OU=HS,OU=Students" + domain;
 			} else if (index.equals( "2020")) {
-				return "OU=2020,OU=HS,OU=Students," + domain;
+				return "OU=2020,OU=HS,OU=Students" + domain;
 			} else if (index.equals( "2021")) {
-				return "OU=2021,OU=HS,OU=Students," + domain;
+				return "OU=2021,OU=HS,OU=Students" + domain;
 			} else if (index.equals( "2022")) {
-				return "OU=2022,OU=HS,OU=Students," + domain;
+				return "OU=2022,OU=HS,OU=Students" + domain;
 			} else if (index.equals( "2023")) {
-				return "OU=2023,OU=MS,OU=Students," + domain;
+				return "OU=2023,OU=MS,OU=Students" + domain;
 			} else if (index.equals( "2024")) {
-				return "OU=2024,OU=MS,OU=Students," + domain;
+				return "OU=2024,OU=MS,OU=Students" + domain;
 			} else if (index.equals( "2025")) {
-				return "OU=2025,OU=MS,OU=Students," + domain;
+				return "OU=2025,OU=MS,OU=Students" + domain;
 			} else if (index.equals( "2026")) {
-				return "OU=2026,OU=ES,OU=Students," + domain;
+				return "OU=2026,OU=ES,OU=Students" + domain;
 			} else if (index.equals( "2027")) {
-				return "OU=2027,OU=ES,OU=Students," + domain;
+				return "OU=2027,OU=ES,OU=Students" + domain;
 			} else if (index.equals( "2028")) {
-				return "OU=2028,OU=ES,OU=Students," + domain;
+				return "OU=2028,OU=ES,OU=Students" + domain;
 			} else if (index.equals( "2029")) {
-				return "OU=2029,OU=ES,OU=Students," + domain;
+				return "OU=2029,OU=ES,OU=Students" + domain;
 			} else if (index.equals( "2030")) {
-				return "OU=2030,OU=ES,OU=Students," + domain;
+				return "OU=2030,OU=ES,OU=Students" + domain;
 			} else if (index.equals( "2031")) {
-				return "OU=2019,OU=HS,OU=Students," + domain;
+				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2032")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2033")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2034")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2035")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2036")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2037")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2038")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2039")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 //			} else if (index.equals( "2040")) {
-//				return "OU=2019,OU=HS,OU=Students," + domain;
+//				return "OU=2019,OU=HS,OU=Students" + domain;
 			} else {
 				JOptionPane.showMessageDialog(null, "If you see this "
 						+ "something is screwed up4");
@@ -657,8 +661,10 @@ public class AccountGUI extends JFrame {
 				System.exit(1);
 			}
 
-		} else if (StaffCB.getSelectedItem()!="0") {
-			String index = graduateYearCB.getSelectedItem().toString();
+		} else if (StaffCB.getSelectedItem()=="0") {
+			String index = (String)graduateYearCB.getSelectedItem();//.toString();
+            int count = graduateYearCB.getItemCount();
+System.out.println(graduateYearCB.getItemAt(count));
 			if (index.equals( "2019")) {
 				return "Students/2019";
 			} else if (index.equals( "2020")) {
