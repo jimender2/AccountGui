@@ -366,8 +366,9 @@ public class AccountGUI extends JFrame {
 				String firstName, String lastName, String password, 
 				String org, boolean ChangePassword) {
 			try {
-				Runtime.getRuntime().exec("PowerShell -Command GoogleAccount.ps1 " + userName + " " + firstName + " " + 
-						lastName + " " + password + " " + org);
+				System.out.println("I screwed up");
+				Runtime.getRuntime().exec("powershell -noexit \"& .\\GoogleAccount.ps1 " + userName + " " + firstName + " " + 
+						lastName + " " + password + " " + org + "\"");
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -380,8 +381,9 @@ public class AccountGUI extends JFrame {
 				boolean ChangePassword) {
 
 			try {
-				Runtime.getRuntime().exec("PowerShell -Command ADAccount.ps1 " + userName + " " + firstName + " " +
-						lastName + " " + password + " " + org + " " + ChangePassword);
+				System.out.println("I executed");
+				Runtime.getRuntime().exec("powershell -noexit \"& .\\ADAccount.ps1 " + userName + " " + firstName + " " +
+						lastName + " " + password + " " + org + " " + ChangePassword + "\"");
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
